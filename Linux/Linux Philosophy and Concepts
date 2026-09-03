@@ -1,1 +1,47 @@
 
+## Linux History
+
+### The Birth of Linux
+
+In 1991, **Linus Torvalds**, a computer science student at the University of Helsinki in Finland, started a personal project to create his own operating system kernel.
+
+A **kernel** is the core component of an operating system that manages communication between software and hardware. Linus initially developed the kernel as a hobby project, but it quickly attracted the attention of developers around the world.
+
+As the project grew, Linus combined the kernel with various tools and utilities required to build a complete operating system. This project eventually became known as **Linux**.
+
+---
+
+### The GNU General Public License (GPL)
+
+In 1992, Linux was released under the **GNU General Public License (GPL)**, a license created by the **Free Software Foundation (FSF)**.
+
+The GPL allows anyone to:
+
+- Use the software freely
+- Study the source code
+- Modify the software
+- Share and distribute copies
+
+This open-source approach encouraged developers worldwide to contribute to Linux, making it one of the largest collaborative software projects in history.
+
+---
+
+### Rise of Linux Distributions
+
+The Linux kernel alone is not a complete operating system. To create a fully functional system, it was combined with tools and utilities from the **GNU Project**.
+
+This combination led to the creation of complete operating systems known as **Linux Distributions (Distros)**.
+
+Some popular Linux distributions include:
+
+- Ubuntu
+- Debian
+- Red Hat Enterprise Linux (RHEL)
+- CentOS
+- Fedora
+- Arch Linux
+
+These distributions began appearing in the mid-1990s and played a major role in making Linux accessible to users and organizations worldwide.
+
+---
+

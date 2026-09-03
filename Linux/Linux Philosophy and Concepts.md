@@ -9,5 +9,9 @@ In 1992, Linux was re-licensed under the **General Public License (GPL)** by the
 ## The Rise of Distributions (Mid-1990s)
 By combining the Linux kernel with other system components from the **GNU project**, developers around the world created complete systems called **Linux Distributions**, which first appeared in the mid-1990s.
 
+## Timeline Visual
+
+![Linux History Timeline](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/linux-history-timeline.svg?raw=true)
+
 
 

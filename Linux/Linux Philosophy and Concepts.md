@@ -19,7 +19,6 @@ Because it worked so well, other companies wanted a piece of it. AT&T licensed U
 
 Every one of these is **closed-source and owned by a company**. If you wanted to run UNIX, you paid for a license, and you were locked into whatever hardware that vendor supported.
 
-![UNIX Family Tree](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/unix-family-tree.png?raw=true)
 ---
 
 ## 2. What Is Linux?
@@ -46,8 +45,6 @@ Think of it this way: UNIX is like a handful of closed, expensive car brands —
 | **Ownership** | A company (Oracle, IBM, HP) | No single owner — the community |
 | **Versions** | A handful (Solaris, AIX, HP-UX) | Hundreds (Ubuntu, Fedora, Debian...) |
 | **Customization** | Locked down by the vendor | Fully open to modify |
-
-![Linux Family Tree](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/linux-family-tree.png?raw=true)
 
 ---
 

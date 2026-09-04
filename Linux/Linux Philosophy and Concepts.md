@@ -1,6 +1,6 @@
 # Linux Philosophy and Concepts
 
-This guide covers everything you need to understand Linux from the ground up — where it came from, what it's actually made of, the philosophy that shapes how it works, and where you'll encounter it in the real world.
+This guide takes you from zero to a solid working understanding of Linux — where it came from, what it's actually made of, how it's organized, the philosophy behind its design, and where you'll run into it in the real world. Each concept builds on the one before it, and every idea comes with a concrete example so it's not just theory.
 
 ---
 
@@ -8,7 +8,7 @@ This guide covers everything you need to understand Linux from the ground up —
 
 Every story about Linux has to start with UNIX, because Linux wouldn't exist without it.
 
-Back in **1969**, at **AT&T Bell Labs**, a small team including **Ken Thompson** and **Dennis Ritchie** built an operating system called **UNIX**. At the time, this was revolutionary. UNIX introduced ideas that had never really existed together before: a filesystem organized like a tree with a single root, the ability to run several programs at once (multitasking), and support for multiple people using the same computer at the same time (multiuser).
+Back in **1969**, at **AT&T Bell Labs**, a small team including **Ken Thompson** and **Dennis Ritchie** built an operating system called **UNIX**. UNIX introduced ideas that had never really existed together before: a filesystem organized like a tree with a single root, the ability to run several programs at once (multitasking), and support for multiple people using the same computer at the same time (multiuser).
 
 Because it worked so well, other companies wanted a piece of it. AT&T licensed UNIX out, and over the following decades different vendors built their own versions:
 
@@ -18,6 +18,8 @@ Because it worked so well, other companies wanted a piece of it. AT&T licensed U
 - A separate effort at **UC Berkeley** produced **BSD**, which itself branched into FreeBSD, OpenBSD, and eventually became the foundation of Apple's **macOS**
 
 Every one of these is **closed-source and owned by a company**. If you wanted to run UNIX, you paid for a license, and you were locked into whatever hardware that vendor supported.
+
+**Example:** If you've ever used a Mac, you've technically touched UNIX — macOS is built on Darwin, which has BSD UNIX at its core.
 
 ---
 
@@ -35,7 +37,7 @@ This is the most important distinction to hold onto:
 
 > **Linux was inspired by UNIX. Linux is not UNIX.** It shares none of UNIX's original code — it's an entirely independent, open source implementation built in the same spirit.
 
-Think of it this way: UNIX is like a handful of closed, expensive car brands — you buy exactly what the manufacturer gives you, and you can't touch what's under the hood. Linux is like an open blueprint for a car that anyone can pick up, rebuild, customize, and give away for free. That's exactly why UNIX has only a few official versions, while Linux has hundreds of "flavors" today.
+Think of it this way: UNIX is like a handful of closed, expensive car brands — you buy exactly what the manufacturer gives you, and you can't touch what's under the hood. Linux is like an open blueprint for a car that anyone can pick up, rebuild, customize, and give away for free.
 
 | | UNIX | Linux |
 |---|---|---|
@@ -45,6 +47,8 @@ Think of it this way: UNIX is like a handful of closed, expensive car brands —
 | **Ownership** | A company (Oracle, IBM, HP) | No single owner — the community |
 | **Versions** | A handful (Solaris, AIX, HP-UX) | Hundreds (Ubuntu, Fedora, Debian...) |
 | **Customization** | Locked down by the vendor | Fully open to modify |
+
+**Example:** A bank running Oracle's Solaris pays for a license and support contract every year. A startup running Ubuntu pays nothing — and can rip out and replace any piece of it if they want to.
 
 ---
 
@@ -70,35 +74,9 @@ Here's how Linux actually grew, decade by decade, from a hobby kernel to the bac
 | 2020s | Embedded and AI growth | Linux expands into IoT, edge computing, and AI/ML environments, powering everything from smart devices to autonomous vehicles |
 | 2024 | Linux dominates the world | Over 90% of public cloud workloads, and virtually all supercomputers and servers, now run Linux |
 
+**Example:** Every time you open an Android app (2007's legacy) or your company deploys code through Docker (2017's legacy), you're using direct results of these milestones.
+
 ---
-## 4. What Is the Linux Kernel?
-
-People often say "I'm running Linux," but what they really mean is they're running an operating system *built around* the **Linux kernel**.
-
-The kernel is the core piece of software — the part Linus Torvalds originally wrote. Its job is to sit between your hardware and every program you run, managing:
-
-- The **CPU** — deciding which process gets to run and when
-- **Memory** — allocating and freeing RAM for programs
-- **Devices** — talking to your disk, keyboard, network card, and everything else plugged in
-- **Coordination** — making sure multiple programs can run at once without stepping on each other
-
-**Real-life example:** When you open a web browser, a music player, and a code editor all at once, it's the kernel quietly deciding, thousands of times per second, which of those three programs gets a slice of your CPU next — so all three feel like they're running at the same time, even on a single core.
-
-But here's the key thing: **the kernel by itself is not a usable operating system.** It has no text editor, no web browser, no way to install software. It's an engine with no car built around it yet.
-
-**Real-life example:** Android phones prove this perfectly. Every Android phone runs the **Linux kernel** underneath — managing the phone's CPU, memory, and hardware drivers — but Google built an entirely different layer on top (Android runtime, apps, UI) instead of a desktop environment. Same kernel, completely different "car" built around it.
-
-### Where the Same Kernel Shows Up
-
-| Device / System | What's Actually Running the Show |
-|---|---|
-| Your Android phone | Linux kernel + Android runtime |
-| A Ubuntu laptop | Linux kernel + GNOME desktop |
-| An AWS cloud server | Linux kernel + minimal server tools, no desktop at all |
-| A smart TV or router | Linux kernel + a tiny, stripped-down embedded system |
-| The Steam Deck | Linux kernel + a custom gaming-focused interface (SteamOS) |
-
-**The takeaway:** it's the exact same open source kernel underneath every single one of these — what changes is everything built *around* it, which is exactly what a distribution is.
 
 ## 4. What Is the Linux Kernel?
 
@@ -111,11 +89,11 @@ The kernel is the core piece of software — the part Linus Torvalds originally 
 - **Devices** — talking to your disk, keyboard, network card, and everything else plugged in
 - **Coordination** — making sure multiple programs can run at once without stepping on each other
 
-**Real-life example:** When you open a web browser, a music player, and a code editor all at once, it's the kernel quietly deciding, thousands of times per second, which of those three programs gets a slice of your CPU next — so all three feel like they're running at the same time, even on a single core.
+**Example:** When you have a browser, a music player, and a code editor open at once, the kernel is quietly deciding, thousands of times per second, which one gets a slice of your CPU next — so all three feel like they're running at the same time, even on a single core.
 
 But here's the key thing: **the kernel by itself is not a usable operating system.** It has no text editor, no web browser, no way to install software. It's an engine with no car built around it yet.
 
-**Real-life example:** Android phones prove this perfectly. Every Android phone runs the **Linux kernel** underneath — managing the phone's CPU, memory, and hardware drivers — but Google built an entirely different layer on top (Android runtime, apps, UI) instead of a desktop environment. Same kernel, completely different "car" built around it.
+**Example:** Every Android phone runs the Linux kernel underneath — managing CPU, memory, and hardware drivers — but Google built a completely different layer on top (Android runtime, apps, UI) instead of a desktop. Same kernel, completely different "car" built around it.
 
 ### Where the Same Kernel Shows Up
 
@@ -127,34 +105,60 @@ But here's the key thing: **the kernel by itself is not a usable operating syste
 | A smart TV or router | Linux kernel + a tiny, stripped-down embedded system |
 | The Steam Deck | Linux kernel + a custom gaming-focused interface (SteamOS) |
 
-**The takeaway:** it's the exact same open source kernel underneath every single one of these — what changes is everything built *around* it, which is exactly what a distribution is.
+**The takeaway:** it's the exact same open source kernel underneath every single one of these — what changes is everything built *around* it.
 
 ---
 
-## 5. What Is a Linux Distribution?
+## 5. What Are the Components of a Linux OS?
 
-This is where a **Linux distribution** ("distro") comes in. A distribution takes the Linux kernel and packages it together with everything else needed to make a complete, usable, installable operating system.
+Now that you know the kernel alone isn't enough, here's the full picture of everything that gets layered on top of it to make a real, usable operating system:
 
-Each of these pieces is usually built by a completely separate open source project, with its own independent community:
+| Component | What It Does | Examples |
+|---|---|---|
+| **Bootloader** | The first program that runs when you power on the machine; loads the kernel into memory | GRUB, LILO |
+| **Kernel** | The core — manages CPU, memory, devices, and processes | Linux kernel |
+| **System Libraries** | Shared code that applications call into for common tasks (file I/O, math, networking) | glibc |
+| **Daemons / Services** | Background processes that start at boot and quietly handle system tasks | systemd, sshd, cron, httpd |
+| **Shell** | The command-line interpreter — reads what you type and tells the OS what to do | bash, zsh, tcsh |
+| **Package Manager** | Installs, updates, and removes software, and tracks dependencies | apt, dnf, pacman, zypper |
+| **Compiler / Dev Tools** | Builds software from source code | GCC, Clang, Make |
+| **Graphics System** | Lets programs draw visuals to the screen | X11, Wayland |
+| **Desktop Environment** | The graphical interface layered on top — windows, icons, menus | GNOME, KDE, Xfce |
+| **Applications** | The actual programs users interact with | Firefox, LibreOffice, VS Code |
+
+### How They Stack Together
+┌─────────────────────────────────────┐
+│ Applications (Firefox, editors) │ ← what you use
+├─────────────────────────────────────┤
+│ Desktop Environment (GNOME, KDE) │ ← what you see
+├─────────────────────────────────────┤
+│ Shell / Package Manager / Compiler │ ← how you control the system
+├─────────────────────────────────────┤
+│ System Libraries & Daemons │ ← quiet background support
+├─────────────────────────────────────┤
+│ LINUX KERNEL │ ← manages hardware
+├─────────────────────────────────────┤
+│ Hardware (CPU, RAM, Disk) │ ← the physical machine
+└─────────────────────────────────────┘
+
+
+**Example:** When you type `sudo apt install vlc` on Ubuntu, you're using the **shell** (bash) to talk to the **package manager** (apt), which downloads a program that will eventually run using **system libraries** (glibc) and get displayed to you through the **desktop environment** (GNOME) — every layer working together in one command.
+
+**The simple way to remember it:** Kernel = the engine. Shell + package manager = the controls. Libraries + daemons = the wiring. Desktop + apps = the interior. A **Linux distribution** is what you get when someone bundles all of these into one installable package.
+
+---
+
+## 6. What Is a Linux Distribution?
+
+This is where a **Linux distribution** ("distro") comes in. A distribution takes the Linux kernel and packages it together with everything from Chapter 5 into one complete, installable operating system.
 
 ![What Makes Up a Linux Distribution](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/linux-distribution-composition.png?raw=true)
 
-| Component | Purpose | Examples |
-|---|---|---|
-| Compiler | Builds software from source code | GCC, Clang |
-| Debugger | Tests and troubleshoots programs | gdb |
-| Core Libraries | Shared code that applications depend on to run | glibc |
-| Graphics System | Lets programs display visuals on screen | X11, Wayland |
-| Desktop Environment | Defines how the system looks and feels | GNOME, KDE, Xfce |
-| Package Manager | Installs, updates, and removes software | apt, dnf, zypper |
+**Example:** When you install **Ubuntu**, you're not just getting "Linux" — you're getting the Linux kernel + GNOME desktop + apt package manager + GCC compiler + LibreOffice, all pre-bundled and tested together by Canonical so it works out of the box.
 
-**Real-life example:** When you install **Ubuntu**, you're not just getting "Linux" — you're getting the Linux kernel + GNOME desktop + apt package manager + GCC compiler + LibreOffice, all pre-bundled and tested together by Canonical so it works out of the box.
-
-A distribution's real job is to take all of these independently-built pieces, **test them together for compatibility**, and package them so they install and update cleanly as one system. Most distributions also throw in a set of preinstalled apps — browsers, editors, basic tools — so you can start working immediately after install.
+A distribution's real job is to take independently-built pieces, **test them together for compatibility**, and package them so they install and update cleanly as one system.
 
 ### Not Every Distro Uses the Same Kernel Version
-
-Distributions don't all ship the exact same kernel, and they don't all update at the same speed:
 
 - **RHEL 8** ships the older but rock-solid **4.18** kernel
 - **RHEL 9** runs kernel **5.14**
@@ -162,7 +166,7 @@ Distributions don't all ship the exact same kernel, and they don't all update at
 - **Fedora** and **openSUSE** adopt brand-new kernels much faster, favoring cutting-edge features over maximum stability
 - Many distros **backport** — they take a specific new feature from a newer kernel and carefully adapt it to run on their older, more tested kernel base
 
-**Real-life example:** A bank running **RHEL 8** in production won't touch a newer kernel for years — stability matters more than new features when money is on the line. Meanwhile, a developer running **Fedora** on their laptop gets the newest kernel within weeks of release, because they want the latest hardware support and features.
+**Example:** A bank running RHEL 8 in production won't touch a newer kernel for years — stability matters more than new features when money is on the line. A developer running Fedora on their laptop gets the newest kernel within weeks of release, because they want the latest hardware support.
 
 The complete kernel archive, current and historical, lives at **kernel.org**.
 
@@ -178,11 +182,11 @@ Because Linux is open source, anyone can take the kernel and GNU tools and build
 | Arch-based | pacman | Arch Linux, Manjaro |
 | Independent | varies | Slackware, Gentoo |
 
-**Real-life example:** This is why installing software on Ubuntu uses `apt install`, but on Fedora it's `dnf install`, and on Arch it's `pacman -S` — same Linux underneath, but each family speaks a different "package manager language."
+**Example:** Installing software on Ubuntu uses `apt install`, but on Fedora it's `dnf install`, and on Arch it's `pacman -S` — same Linux underneath, but each family speaks a different "package manager language."
 
 ### The Complete Picture: From Kernel to Distribution Families
 
-This diagram ties everything in this chapter together — the full stack from the user down to the kernel, and how that one kernel branches into every major distro family:
+This diagram ties the whole chapter together — the full stack from the user down to the kernel, and how that one kernel branches into every major distro family:
 
 ![Linux Architecture and Distribution Family Tree](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/linux-family-tree.png?raw=true)
 
@@ -190,28 +194,26 @@ Reading it top to bottom: you interact with **apps and a desktop environment**, 
 
 ### Commercial vs. Community Distributions
 
-Large organizations — businesses, universities, government agencies — usually lean on **commercially supported** distributions, where a company provides professional support contracts and regular updates. The three biggest are:
+Large organizations usually lean on **commercially supported** distributions, where a company provides professional support contracts and regular updates:
 
 - **Red Hat Enterprise Linux (RHEL)** — maintained by Red Hat
 - **SUSE Linux Enterprise** — maintained by SUSE
 - **Ubuntu** — maintained by Canonical
 
-**Real-life example:** Companies like Delta Air Lines, NASA, and most major banks run RHEL specifically because Red Hat guarantees phone support and 10-year security patches — critical for systems that can't afford downtime.
+**Example:** Companies like Delta Air Lines, NASA, and most major banks run RHEL specifically because Red Hat guarantees phone support and 10-year security patches — critical for systems that can't afford downtime.
 
-If you want RHEL-level reliability without paying for support, there are free community alternatives. **CentOS** used to be that option, but at the end of 2021 it was replaced by **CentOS Stream**, which tracks just *ahead* of RHEL's stable releases rather than mirroring them exactly. Two community projects rose up to fill that gap:
+For those who want RHEL-level reliability without paying for support, free community alternatives exist. **CentOS** used to fill this role, but at the end of 2021 it was replaced by **CentOS Stream**, which tracks just *ahead* of RHEL's stable releases rather than mirroring them exactly. Two community projects rose up to fill that gap:
 
 - **AlmaLinux**
 - **Rocky Linux**
 
 Both are built to be **binary-compatible with RHEL** — software made for RHEL generally runs on them without any changes needed.
 
-**Real-life example:** A startup that can't afford RHEL's support contract but still wants the same rock-solid base often runs **Rocky Linux** or **AlmaLinux** on their servers instead — same reliability, zero license cost.
+**Example:** A startup that can't afford RHEL's support contract but still wants the same rock-solid base often runs Rocky Linux or AlmaLinux on their servers instead — same reliability, zero license cost.
 
 Developers and educators, meanwhile, tend to gravitate toward **Ubuntu** and **Fedora** for their up-to-date packages and easy setup.
 
-**Real-life example:** Most coding bootcamps, university CS labs, and YouTube programming tutorials default to **Ubuntu**, because it's free, has the largest community for troubleshooting, and "just works" for beginners.
-
-Regardless of whether a distro is commercial or community-run, most of them offer update services (security patches, bug fixes, performance improvements) along with documentation, forums, and wikis for support.
+**Example:** Most coding bootcamps, university CS labs, and YouTube programming tutorials default to Ubuntu, because it's free, has the largest community for troubleshooting, and "just works" for beginners.
 
 **Want to go deeper?**
 - **kernel.org** — the official Linux Kernel Archive
@@ -229,7 +231,9 @@ Regardless of whether a distro is commercial or community-run, most of them offe
 | **CentOS Stream / Rocky / Alma** | Budget-conscious startups needing RHEL-like stability for free |
 | **Arch / Manjaro** | Power users and developers who want full control over every package |
 
-## 6. Linux's Philosophy — The Design Principles Behind It All
+---
+
+## 7. Linux's Philosophy — The Design Principles Behind It All
 
 Every successful project needs a guiding philosophy — a set of principles that shape its objectives and steer its growth. Linux's philosophy is what turned a student's kernel into a system trusted to run the world's cloud infrastructure.
 
@@ -237,13 +241,19 @@ Every successful project needs a guiding philosophy — a set of principles that
 
 Linux is continuously enhanced and maintained by a network of developers scattered across the globe, collaborating over the internet, with Linus Torvalds guiding the project from the top. There's no formal application process, no gatekeeping committee. The only real qualifications to contribute are **technical skill**, a **desire to contribute**, and the **ability to collaborate** with others.
 
+**Example:** Anyone can submit a fix to the Linux kernel on kernel.org — students, hobbyists, and engineers at companies like Google and IBM all submit code through the exact same open review process.
+
 ### Principle 1: A Hierarchical Filesystem
 
 Like UNIX, Linux organizes all of its data in a single tree structure. At the very top sits the **root directory**, represented by one forward slash (`/`). Every other file and folder on the system, no matter how deeply nested, branches outward from this single root.
 
+**Example:** A path like `/home/shakti/projects/notes.md` is read left to right: start at root, go into `home`, then `shakti`, then `projects`, and finally the file itself.
+
 ### Principle 2: "Everything Is a File"
 
-This is arguably the most elegant idea in Linux's design. The system treats many of its components — not just documents and photos, but **devices**, **processes**, and even **network connections** — as file-like objects (this is exactly what `/dev` and `/proc` are for, highlighted in the diagram above). The practical result is powerful: the same commands and tools you'd normally use to read or write an ordinary file can also be used to interact with a hard drive, monitor a running process, or manage a network connection. One consistent interface for almost everything.
+This is arguably the most elegant idea in Linux's design. The system treats many of its components — not just documents and photos, but **devices**, **processes**, and even **network connections** — as file-like objects. The same commands and tools you'd normally use to read or write an ordinary file can also be used to interact with a hard drive, monitor a running process, or manage a network connection.
+
+**Example:** Running `cat /proc/cpuinfo` shows you live details about your CPU — because Linux represents that running information as a "file" you can simply read, just like a text document.
 
 ### Principle 3: Multitasking and Multiuser by Design
 
@@ -251,52 +261,54 @@ Linux was built from day one to be both:
 - **Multitasking** — capable of running many processes simultaneously, without one program blocking another.
 - **Multiuser** — capable of supporting several people working on the very same system at the same time, each with their own separate session and permissions.
 
+**Example:** On a university's Linux server, dozens of students can be logged in and running their own programs at the same time, each completely isolated from what everyone else is doing.
+
 ### Principle 4: Networking Handled by Daemons
 
 Linux comes with built-in networking capabilities baked directly into the operating system. Behind the scenes, it relies on **daemons** — background service processes, a concept it inherited directly from UNIX — to quietly handle system and network tasks without ever requiring the user to step in.
 
+**Example:** Every time you SSH into a remote Linux server, you're talking to the `sshd` daemon quietly running in the background, waiting to accept that connection.
+
 ---
 
-## 7. Where Linux Actually Lives in the Real World
+## 8. Where Linux Actually Lives in the Real World
 
 This is the part most people don't realize: Linux isn't some niche hobbyist system — it's everywhere, quietly running the infrastructure of modern life.
 
 - **The Cloud** — Linux is the standard operating system behind cloud infrastructure. AWS, Google Cloud, and Azure all run the vast majority of their workloads on Linux. Tools like **Docker** and **Kubernetes**, the backbone of modern DevOps, are built on top of Linux's process and filesystem model.
 - **Servers** — Nearly every web server, database server, and backend system you interact with daily is running some Linux distribution behind the scenes.
 - **Android Phones** — Android, the world's most-used mobile operating system, is built directly on top of the **Linux kernel**.
-- **Supercomputers** — Essentially all of the world's top supercomputers run Linux, largely because of its stability, flexibility, and the fact that it's free to customize at massive scale.
+- **Supercomputers** — Essentially all of the world's top supercomputers run Linux.
 - **Embedded Devices & IoT** — Routers, smart TVs, smart home devices, and industrial equipment frequently run stripped-down Linux builds.
 - **Desktops** — A smaller but steadily growing share of everyday desktop and laptop users run Linux distros like Ubuntu, Fedora, or Linux Mint directly as their daily OS.
 
-The pattern is simple: wherever reliability, flexibility, and cost-efficiency matter at scale, Linux tends to be the answer.
+**Example:** When you stream a show on Netflix, order food through an app, or check your bank balance online, there's a very good chance the server handling that request is running Linux somewhere in a data center.
 
 ---
 
-## 8. The Linux Community
+## 9. The Linux Community
 
 Imagine you're configuring a Linux file server and you hit a wall — the documentation doesn't help, and nobody on your team knows the answer either. This is exactly where the **Linux community** becomes one of your most valuable resources.
 
-The entire Linux ecosystem runs on **collaboration and shared knowledge**. Whether you're a system administrator, a developer, or a total beginner, there's almost certainly someone who has already faced — and solved — the exact problem you're stuck on. You don't need to be a programmer to take part; the community is open to everyone.
-
 **Ways to get involved:**
 
-- **Discussion Forums** — Sites like LinuxQuestions.org, Stack Overflow, and distro-specific forums (Ubuntu, Fedora, etc.) are great places to search for solutions or ask new questions.
-- **Community Threads & Mailing Lists** — Following ongoing discussions keeps you in the loop on fixes and upcoming changes in projects you rely on.
+- **Discussion Forums** — Sites like LinuxQuestions.org, Stack Overflow, and distro-specific forums (Ubuntu, Fedora, etc.)
+- **Community Threads & Mailing Lists** — Ongoing discussions that keep you in the loop on fixes and upcoming changes.
 - **Local Linux User Groups (LUGs)** — In-person or virtual meetups where local enthusiasts share knowledge and troubleshoot together.
-- **Chat Platforms** — Real-time spaces like IRC channels, Discord servers, and Matrix rooms exist for most major distros and open source projects.
-- **Online Community Hubs** — **linux.com**, hosted by the Linux Foundation, draws over a million visitors a month, offering news, discussions, and free tutorials for all skill levels.
-- **Collaborative Projects** — Contributing isn't limited to writing code — you can help with documentation, translations, bug reports, and testing.
-- **Community Events** — Conferences and meetups (Linux Foundation events, FOSDEM, local LUGs) bring the community together in person.
+- **Chat Platforms** — Real-time spaces like IRC channels, Discord servers, and Matrix rooms.
+- **Online Community Hubs** — **linux.com**, hosted by the Linux Foundation, draws over a million visitors a month.
+- **Collaborative Projects** — Documentation, translations, bug reports, and testing — not just code.
+- **Community Events** — Conferences and meetups (Linux Foundation events, FOSDEM, local LUGs).
+
+**Example:** A new developer stuck on a permissions error can post the exact error message on Stack Overflow and, within minutes, get a working fix from someone across the world who's hit the exact same issue.
 
 **Learning resources:** Linux Foundation Education and other providers offer both self-paced and instructor-led courses — many free or low-cost — whether you're just starting out or working toward certification.
 
-Engaging with the Linux community does more than solve your immediate problem — it builds your knowledge, grows your professional network, and contributes back to the open source movement that drives Linux forward.
-
 ---
 
-## 9. Linux Terminology — Quick Glossary
+## 10. Linux Terminology — Quick Glossary
 
-Before going further, it helps to have this core vocabulary locked in — you'll run into these terms constantly:
+Before going further, it helps to have this core vocabulary locked in:
 
 | Term | What It Means | Examples |
 |---|---|---|
@@ -314,4 +326,4 @@ Before going further, it helps to have this core vocabulary locked in — you'll
 
 ## The Full Picture
 
-UNIX came first, in 1969, and stayed closed and vendor-controlled. Linux arrived in 1991, inspired by UNIX's ideas but built from independent code, and became free and open the moment it adopted the GPL license in 1992. The **kernel** is the engine at the center of it all — but it needs a **distribution** to wrap around it before it becomes something you can actually install and use. Its philosophy of openness, a single filesystem tree, "everything is a file," multitasking for many users, and quiet background daemons is what still holds it together today. And that combination now quietly powers the cloud, the servers behind your favorite apps, the phone in your pocket, and nearly every supercomputer on Earth — all maintained by a global community that anyone is free to join.
+UNIX came first, in 1969, and stayed closed and vendor-controlled. Linux arrived in 1991, inspired by UNIX's ideas but built from independent code, and became free and open the moment it adopted the GPL license in 1992. The **kernel** is the engine at the center of it all — but it needs the rest of the **OS components** wrapped around it, packaged together as a **distribution**, before it becomes something you can actually install and use. Its philosophy of openness, a single filesystem tree, "everything is a file," multitasking for many users, and quiet background daemons is what still holds it together today. And that combination now quietly powers the cloud, the servers behind your favorite apps, the phone in your pocket, and nearly every supercomputer on Earth — all maintained by a global community that anyone is free to join.

@@ -126,21 +126,6 @@ Now that you know the kernel alone isn't enough, here's the full picture of ever
 | **Desktop Environment** | The graphical interface layered on top — windows, icons, menus | GNOME, KDE, Xfce |
 | **Applications** | The actual programs users interact with | Firefox, LibreOffice, VS Code |
 
-### How They Stack Together
-┌─────────────────────────────────────┐
-│ Applications (Firefox, editors) │ ← what you use
-├─────────────────────────────────────┤
-│ Desktop Environment (GNOME, KDE) │ ← what you see
-├─────────────────────────────────────┤
-│ Shell / Package Manager / Compiler │ ← how you control the system
-├─────────────────────────────────────┤
-│ System Libraries & Daemons │ ← quiet background support
-├─────────────────────────────────────┤
-│ LINUX KERNEL │ ← manages hardware
-├─────────────────────────────────────┤
-│ Hardware (CPU, RAM, Disk) │ ← the physical machine
-└─────────────────────────────────────┘
-
 
 **Example:** When you type `sudo apt install vlc` on Ubuntu, you're using the **shell** (bash) to talk to the **package manager** (apt), which downloads a program that will eventually run using **system libraries** (glibc) and get displayed to you through the **desktop environment** (GNOME) — every layer working together in one command.
 

@@ -241,8 +241,6 @@ Linux is continuously enhanced and maintained by a network of developers scatter
 
 Like UNIX, Linux organizes all of its data in a single tree structure. At the very top sits the **root directory**, represented by one forward slash (`/`). Every other file and folder on the system, no matter how deeply nested, branches outward from this single root.
 
-![Linux Filesystem Hierarchy](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/linux-filesystem-hierarchy.png?raw=true)
-
 ### Principle 2: "Everything Is a File"
 
 This is arguably the most elegant idea in Linux's design. The system treats many of its components — not just documents and photos, but **devices**, **processes**, and even **network connections** — as file-like objects (this is exactly what `/dev` and `/proc` are for, highlighted in the diagram above). The practical result is powerful: the same commands and tools you'd normally use to read or write an ordinary file can also be used to interact with a hard drive, monitor a running process, or manage a network connection. One consistent interface for almost everything.

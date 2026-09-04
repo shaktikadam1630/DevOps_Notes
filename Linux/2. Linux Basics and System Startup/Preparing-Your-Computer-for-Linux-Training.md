@@ -1,6 +1,6 @@
 # Preparing Your Computer for Linux Training
 
-Before diving into hands-on Linux work, you need a working Linux system to practice on. This page covers what you need, which distributions this course uses, how to install Linux, and a final checklist before you begin.
+Before diving into hands-on Linux work, you need a working Linux system to practice on. Here's what you need, which distributions this course uses, how to install Linux, and a final checklist before you begin.
 
 ---
 

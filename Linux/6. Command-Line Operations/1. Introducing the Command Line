@@ -1,0 +1,214 @@
+# Command-Line Operations
+
+This module marks the shift from graphical tools to the terminal — where Linux system administrators spend most of their time, and where the system's real power lives.
+
+---
+
+## 1. Introducing the Command Line
+
+There's a well-known saying in the Unix world: **graphical interfaces make easy tasks easier, while the command line makes difficult tasks possible.** Linux was built around the terminal — which explains why it remains so powerful even decades later.
+
+Working from the command line, you can:
+
+- Avoid the overhead of a full graphical interface
+- Accomplish virtually any task the system supports, without navigating multiple menus
+- Script repetitive tasks — or ones you'd otherwise forget how to do
+- Log into remote machines as if sitting in front of them
+- Launch graphical applications directly, without hunting through menus first
+
+**The key advantage:** desktop environments and graphical tools vary between distributions, but the command line stays largely consistent. Learn it on one system, and most of that knowledge carries over directly to the next.
+
+**Example:** Restarting a web server through a GUI on Ubuntu looks nothing like doing it on CentOS's interface — but `sudo systemctl restart apache2` (or `httpd`) works almost identically on both, once you know the command.
+
+> **Coming from Windows?** The closest equivalent is Command Prompt or PowerShell — though the terminal plays a far more central role in how Linux operates. **On a Mac?** Same idea as the Terminal app — since macOS is Unix-based under the hood, a lot of this will already look familiar.
+
+---
+
+## 2. Using a Text Terminal on the Graphical Desktop
+
+### Terminal Emulators
+
+A **terminal emulator** opens a window that behaves like a standalone text-only terminal, even while running a full graphical desktop. Most support multiple sessions via tabs, similar to a web browser.
+
+![Anatomy of a Command](https://github.com/shaktikadam1630/DevOps_Notes/blob/main/Linux/images/command-anatomy.png?raw=true)
+
+| Distribution | Default Terminal |
+|---|---|
+| Ubuntu, openSUSE (GNOME) | `gnome-terminal` |
+| CentOS (GNOME) | `gnome-terminal`; `konsole` if KDE is installed |
+
+You may also encounter `xterm`, `konsole`, or `terminator` depending on setup.
+
+**Example:** Running the exact same `df -h` command in gnome-terminal on Arch Linux, openSUSE, Ubuntu, and CentOS Stream side by side produces near-identical output formatting — the terminal experience is remarkably consistent across distros, even though the desktop backgrounds and window themes look completely different.
+
+### Launching Terminal Windows
+
+Modern GNOME Shell no longer has an old-style Applications menu, so:
+
+- Click **Activities** (or press **Super/Windows key**), type "terminal," press Enter
+- On Ubuntu: **Ctrl+Alt+T** opens a terminal directly — the fastest method, worth learning immediately
+- Right-click the desktop background → **Open in Terminal** (works on most systems, no setup needed)
+
+**Tip:** Pin your terminal to the favorites bar — you'll be using it constantly.
+
+### A Few Commands Worth Knowing Early
+
+| Command | Does |
+|---|---|
+| `cat` | Displays a file's contents (or concatenates multiple files) |
+| `head` | Shows the first few lines of a file |
+| `tail` | Shows the last few lines of a file |
+| `man` | Opens a command's documentation page |
+
+You'll also encounter the **pipe symbol (`\|`)**, which feeds one command's output as input into another — one of the shell's most useful features, and it behaves identically regardless of distribution.
+
+---
+
+## 3. Some Basic Utilities: The Command Line
+
+Most commands typed at the shell prompt break down into **three parts**:
+
+| Part | Meaning |
+|---|---|
+| **Command** | The specific program, utility, or script being executed |
+| **Options** | Switches that alter behavior — single dash for short form (`-p`), double dash for long form (`--print`) |
+| **Argument** | The target — the exact file, path, or data the command should process |
+
+**Example:** In `ls -l /home/student` — `ls` is the command, `-l` is the option (long listing format), and `/home/student` is the argument (the directory to list).
+
+### sudo
+
+`sudo` ("switch user and do") lets a user run commands with another user's privileges — typically root's — **without logging in as that user directly.**
+
+> For Windows users, `sudo` is roughly equivalent to "Run as Administrator." On macOS, it's the exact same `sudo` command, since macOS shares Unix ancestry with Linux.
+
+**Default configuration varies by distribution:**
+
+| Distribution | Default Behavior |
+|---|---|
+| **Ubuntu** | `sudo` configured automatically at install — the first user account gets sudo access immediately; direct `su`/root login disabled by default (security measure) |
+| **CentOS / openSUSE** | A root password is typically set during install; sudo access for other users must be granted manually |
+
+### Setting Up sudo Manually
+
+*(Only needed when adding a new user, or on distributions where sudo isn't auto-configured.)*
+
+**1. Become root:**
+```bash
+# On Ubuntu (no root password by default):
+sudo -i
+# or
+sudo su
+
+# On CentOS/openSUSE (root password was set at install):
+su
+Password:
+```
+No characters display while typing the password — this is expected.
+
+**2. Grant sudo access** (use `visudo` — it validates syntax before saving, unlike editing the sudoers file directly, where a typo can lock out admin access system-wide):
+```bash
+visudo -f /etc/sudoers.d/username
+```
+Then add:On Ubuntu, run this from an existing admin account instead:
+```bash
+sudo visudo -f /etc/sudoers.d/username
+```
+
+**3. Set file permissions** (if required):
+```bash
+chmod 440 /etc/sudoers.d/username
+```
+
+Once configured, `sudo` prompts for the **user's own password** (not root's) the first time it's used in a session, and periodically thereafter.
+
+**Example:** A newly added admin on a CentOS server can't use `sudo` until an existing admin runs `visudo` to explicitly grant them access — unlike Ubuntu, where the very first account created gets sudo automatically during installation.
+
+### Switching Between the GUI and the Command Line
+
+On Linux, the graphical desktop is **optional**, not a fixed part of the system. Ubuntu, CentOS, and openSUSE all offer both a full desktop install and a GUI-free server edition.
+
+**Example:** Production servers typically run without a GUI entirely — fewer components mean a leaner, more secure, easier-to-maintain system. This differs from Windows Server's historical GUI-reliance (though a GUI-free "Server Core" option now exists), and macOS, which offers no comparable GUI-free option at all.
+
+---
+
+## 4. Virtual Terminals
+
+A **Virtual Terminal (VT)** is a full-screen text session running entirely outside the graphical environment. Multiple VTs can be active simultaneously, but only one is visible at a time. One VT (usually VT1 or VT7) is reserved for the graphical session; the rest are available for text logins.
+
+**Why this matters:** if the graphical desktop becomes unresponsive, switching to a VT lets you troubleshoot without a full reboot.
+
+| Action | Shortcut |
+|---|---|
+| Switch VTs from the GUI | `Ctrl+Alt+F(n)` — e.g., `Ctrl+Alt+F3` for VT3 |
+| Switch VTs from another VT | `Alt+F(n)` |
+
+> There isn't a direct Windows/macOS equivalent — the closest comparison is Windows Safe Mode, though VTs are considerably lighter-weight and quicker to access.
+
+---
+
+## 5. Turning Off the Graphical Desktop
+
+Modern **systemd-based** distributions (Ubuntu, CentOS, openSUSE) manage graphical vs. text-only state through **targets**, rather than the older SysV runlevel numbers.
+
+**Switch to text-only mode** (equivalent to old runlevel 3):
+```bash
+sudo systemctl isolate multi-user.target
+```
+
+**Return to the graphical desktop** (equivalent to old runlevel 5):
+```bash
+sudo systemctl isolate graphical.target
+```
+
+**Older equivalent (still works via a compatibility layer):**
+```bash
+sudo telinit 3   # text-only
+sudo telinit 5   # graphical
+```
+`telinit` still works and shows up in older scripts/documentation, but `systemctl` is preferred on modern systems since it operates directly on systemd's targets.
+
+**Alternative: stop/start just the display manager** (e.g., `gdm` on Ubuntu/openSUSE GNOME systems):
+```bash
+sudo systemctl stop gdm
+sudo systemctl start gdm
+```
+
+> **Note:** This is a related but *narrower* action — it stops the display manager itself rather than transitioning the entire system's target. The visible result often looks similar, but the two aren't strictly interchangeable.
+
+---
+
+## Hands-On: Lab 7.1 — Turning Off the Graphical Desktop
+
+**Task:** From a graphical terminal, switch your system to text-only mode, then bring the graphical desktop back up.
+
+**Solution:**
+
+```bash
+# Switch to text-only mode:
+sudo systemctl isolate multi-user.target
+
+# Return to graphical:
+sudo systemctl isolate graphical.target
+```
+
+**Alternative (narrower scope — display manager only):**
+```bash
+sudo systemctl stop gdm
+sudo systemctl start gdm
+```
+
+**Older/script-based systems:**
+```bash
+sudo telinit 3
+sudo telinit 5
+```
+Both still work, translating internally to the equivalent systemd targets.
+
+**Example:** A sysadmin troubleshooting a broken display driver on a remote server switches it to `multi-user.target` over SSH, diagnoses the issue purely from the command line, fixes the driver package, then switches back to `graphical.target` — all without ever needing physical access to the machine.
+
+---
+
+## The Full Picture
+
+The command line isn't a fallback for when the GUI fails — it's where Linux's real capability lives, precisely because it stays consistent across distributions in a way graphical tools never fully do. Every command breaks down into the same three parts (command, options, arguments), `sudo` governs elevated privileges with different defaults per distribution, and the graphical desktop itself is just one optional layer you can start, stop, or bypass entirely via **systemd targets** or **virtual terminals** — without ever touching a reboot button. Everything from here forward builds on this foundation.
